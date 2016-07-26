@@ -1,0 +1,13 @@
+.list-card {
+    display: inline-block;
+    width: 300px;
+    padding: 20px;
+}
+
+.task-card {
+    padding-top: 10px;
+}
+
+.task-name {
+    font-size: 18px;
+}

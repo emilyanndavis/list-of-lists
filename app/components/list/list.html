@@ -1,0 +1,23 @@
+<div>
+    <h3>{{$ctrl.listObj.name}} <span><button class="btn btn-default btn-sm" ng-click="$ctrl.addingTask = !$ctrl.addingTask">Add Task</button></span></h3>
+    <div ng-if="$ctrl.addingTask">
+        <form ng-submit="$ctrl.addTask($ctrl.newTask)">
+            <input type="text" ng-model="$ctrl.newTask.name">
+            <button class="btn btn-success btn-xs" type="submit">+</button>
+        </form>
+    </div>
+
+    <div class="task-card" ng-repeat="task in $ctrl.listObj.tasks">
+        <task-component task-obj="task"></task-component>
+        <button class="btn btn-danger btn-xs" ng-click="$ctrl.removeTask(task)">Delete</button>
+        <button class="btn btn-info btn-xs" ng-click="$ctrl.movingTask = !$ctrl.movingTask">Move to...</button>
+        <form ng-if="$ctrl.movingTask" ng-submit="$ctrl.moveTask($ctrl.listObj, $ctrl.toListName, task)">
+            <label for="moveToList">Move to...</label>
+            <select ng-model="$ctrl.toListName" name="moveToList">
+                <option ng-repeat="list in $ctrl.lists" ng-model="$ctrl.toListName">{{list.name}}</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-xs">Go!</button>
+        </form>
+    </div>
+
+</div>

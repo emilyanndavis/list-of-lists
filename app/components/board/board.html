@@ -1,0 +1,32 @@
+<div>
+    <div>
+        <h1>Yo dawg I heard you like lists so I made you a list of lists</h1>
+        <button class="btn btn-default" ng-click="$ctrl.addingList = !$ctrl.addingList">Add List</button>
+        <div ng-if="$ctrl.addingList">
+            <form ng-submit="$ctrl.addList($ctrl.newList)">
+                <input type="text" ng-model="$ctrl.newList.name">
+                <button class="btn btn-success btn-sm" type="submit">+</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="list-card" ng-repeat="list in $ctrl.lists">
+        <button class="btn btn-danger btn-sm" ng-click="$ctrl.removeList(list)">Delete list: "{{list.name}}"</button>
+        <!--list-obj is the parameter passed to the ListController, which CREATES THE LIST COMPONENT-->
+        <!--and "list" is the variable that was defined in the ng-repeat above. the current list becomes the value of list-obj passed to the ListController-->
+        <!--list-obj="list" answers the question "Which list am I supposed to render here?"-->
+        <list-component list-obj="list"></list-component>
+    </div>
+
+
+
+    <!--This is essentially what the ng-repeat above does-->
+    <!--for (var i = 0; i < $ctrl.lists.length; i++){
+        var listObj = lists[i];
+        createListComponent(listObj);
+        $('#listOfLists').append(
+            `<h3>${listObj.name}</h3>`
+        );
+    }-->
+
+</div>
