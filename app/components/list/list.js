@@ -7,6 +7,9 @@
             bindings: {
                 // this is the attribute from the list-component element as written in the board html
                 listObj: '<'
+            },
+            require: {
+                board: '^boardComponent'
             }
         });
 
@@ -16,25 +19,22 @@
             // this.listObj = whatever was passed in through the ng directive inside the html tag
             var $ctrl = this;
             $ctrl.lists = ListService.getLists();     
-            $ctrl.movingTask = false;       
 
             $ctrl.removeTask = function(task){
-                ListService.removeTask($ctrl.listObj.id, task);
+                var listId = task.listId;
+                ListService.removeTask(task);
+                $ctrl.listObj = ListService.getLists()[listId];     
             };
 
-            $ctrl.addTask = function(task){
-                ListService.createTask($ctrl.listObj.id, task);
+            $ctrl.addTask = function(listId, task){
+                ListService.createTask(listId, task);
                 $ctrl.newTask = {};
+                $ctrl.listObj = ListService.getLists()[listId];     
             };
 
-            $ctrl.moveTask = function(fromList, toListName, task){
-                for (var listId in $ctrl.lists){
-                    if ($ctrl.lists[listId].name == toListName){
-                        var toList = $ctrl.lists[listId];
-                    }
-                }
-                ListService.moveTask(fromList, toList, task);
-            }            
+            $ctrl.moveTask = function(fromListId, toListName, task){
+                $ctrl.board.moveTask(fromListId, toListName, task);
+            }
 
         }
 

@@ -1,1 +1,13 @@
-<span class="task-name">{{$ctrl.taskObj.name}} </span>
+<div>
+    <h4 class="task-name">{{$ctrl.taskObj.taskName}} </h4>
+    <p class="assigned-to" ng-if="$ctrl.taskObj.assignedTo">Assigned to: <strong>{{$ctrl.taskObj.assignedTo}} <strong></p>
+    <button class="btn btn-danger btn-xs" ng-click="$ctrl.removeTask($ctrl.taskObj)">Delete</button>
+    <button class="btn btn-info btn-xs" ng-click="$ctrl.taskObj.moving = !$ctrl.taskObj.moving">Move to...</button>
+    <form ng-if="$ctrl.taskObj.moving" ng-submit="$ctrl.moveTask($ctrl.taskObj.listId, $ctrl.toListName, $ctrl.taskObj)">
+        <label for="moveToList">Move to...</label>
+        <select ng-model="$ctrl.toListName" name="moveToList">
+            <option ng-repeat="list in $ctrl.taskObj.toListOptions" ng-model="$ctrl.toListName">{{list.name}}</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-xs">Go!</button>
+    </form>
+</div>

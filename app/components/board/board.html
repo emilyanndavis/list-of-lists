@@ -1,21 +1,27 @@
 <div>
     <div>
         <h1>Yo dawg I heard you like lists so I made you a list of lists</h1>
-        <button class="btn btn-default" ng-click="$ctrl.addingList = !$ctrl.addingList">Add List</button>
+        <button class="btn btn-default" ng-click="$ctrl.addingList = !$ctrl.addingList">Add New List</button>
         <div ng-if="$ctrl.addingList">
             <form ng-submit="$ctrl.addList($ctrl.newList)">
-                <input type="text" ng-model="$ctrl.newList.name">
+                <input type="text" ng-model="$ctrl.newList.name" placeholder="List name" required>
                 <button class="btn btn-success btn-sm" type="submit">+</button>
             </form>
         </div>
     </div>
 
-    <div class="list-card" ng-repeat="list in $ctrl.lists">
-        <button class="btn btn-danger btn-sm" ng-click="$ctrl.removeList(list)">Delete list: "{{list.name}}"</button>
-        <!--list-obj is the parameter passed to the ListController, which CREATES THE LIST COMPONENT-->
-        <!--and "list" is the variable that was defined in the ng-repeat above. the current list becomes the value of list-obj passed to the ListController-->
-        <!--list-obj="list" answers the question "Which list am I supposed to render here?"-->
-        <list-component list-obj="list"></list-component>
+    <div class="row">
+        <div ng-repeat="list in $ctrl.lists track by $index">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <button class="btn btn-danger btn-sm" ng-click="$ctrl.removeList(list)">Delete list: "{{list.name}}"</button>
+                <list-component list-obj="list"></list-component>    
+            </div>
+            <div ng-if="$index % 2 === 1" class="clearfix visible-sm-block"></div>
+            <div ng-if="$index % 3 === 2" class="clearfix visible-md-block visible-lg-block"></div>
+            <!--list-obj is the parameter passed to the ListController, which CREATES THE LIST COMPONENT-->
+            <!--and "list" is the variable that was defined in the ng-repeat above. the current list becomes the value of list-obj passed to the ListController-->
+            <!--list-obj="list" answers the question "Which list am I supposed to render here?"-->
+        </div>
     </div>
 
 
