@@ -51,7 +51,7 @@
                 var toListOptions = [];
                 for (var listId in lists) {
                     if (listId != task.listId){
-                        toListOptions.push(lists[listId]);
+                        toListOptions.push(lists[listId].name);
                     }
                 } 
                 return toListOptions;               

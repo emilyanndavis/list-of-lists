@@ -6,7 +6,7 @@
     <form ng-if="$ctrl.taskObj.moving" ng-submit="$ctrl.moveTask($ctrl.taskObj.listId, $ctrl.toListName, $ctrl.taskObj)">
         <label for="moveToList">Move to...</label>
         <select ng-model="$ctrl.toListName" name="moveToList">
-            <option ng-repeat="list in $ctrl.taskObj.toListOptions" ng-model="$ctrl.toListName">{{list.name}}</option>
+            <option ng-repeat="listName in $ctrl.taskObj.toListOptions" ng-model="$ctrl.toListName">{{listName}}</option>
         </select>
         <button type="submit" class="btn btn-primary btn-xs">Go!</button>
     </form>
